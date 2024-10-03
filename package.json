@@ -6,6 +6,7 @@
   "scripts": {
     "clean": "rm -rf dist/*",
     "build": "tsc",
+    "lint": "eslint",
     "start": "node dist/server.js"
   },
   "keywords": [],

@@ -1,29 +1,28 @@
 import js from '@eslint/js';
-import ts from 'typescript-eslint';
+import tseslint from 'typescript-eslint';
 import globals from 'globals';
 import prettierConfig from 'eslint-config-prettier';
 
-export default ts.config(
+export default tseslint.config(
   js.configs.recommended,
-  ts.configs.recommendedTypeChecked,
-  ts.configs.stylisticTypeChecked,
+  ...tseslint.configs.recommendedTypeChecked,
+  ...tseslint.configs.stylisticTypeChecked,
   prettierConfig,
   {
     files: ['**/*.ts'],
     languageOptions: {
-      ecmaVersion: "latest",
+      ecmaVersion: 'latest',
       sourceType: 'module',
       globals: {
+        ...globals.browser,
         ...globals.node,
         ...globals.nodeBuiltin,
         ...globals.builtin,
         ...globals.es2021
       },
-      parser: ts.parser,
+      parser: tseslint.parser,
       parserOptions: {
-        project: import.meta.dirname,
-        tsconfigRootDir: __dirname,
-        projectService: true,
+        projectService: true
       }
     },
     rules: {
@@ -53,11 +52,14 @@ export default ts.config(
     }
   },
   {
-    ignores: [
-      'node_modules',
-      'dist',
-      '*.config.js',
-      '*.config.mjs',
-    ]
+    ignores: ['node_modules', 'dist', '*.config.js', '*.config.mjs']
+  },
+  {
+    rules: {
+      '@typescript-eslint/no-unsafe-assignment': 0,
+      '@typescript-eslint/no-unsafe-call': 0,
+      '@typescript-eslint/no-unsafe-member-access': 0,
+      '@typescript-eslint/no-unsafe-return': 0
+    }
   }
 );

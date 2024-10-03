@@ -5,7 +5,8 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import indexRouter from './routes/index.js';
 import { fileURLToPath } from 'url';
-const app = express();
+
+const app: express.Application = express();
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // Middleware setup
@@ -35,6 +36,7 @@ app.use(
       message: err.message,
       error: req.app.get('env') === 'development' ? err : {}
     });
+    next();
   }
 );
 
