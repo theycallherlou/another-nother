@@ -1,4 +1,4 @@
-# another-nother
+# express-typescript-server
 
 This is an [Express](https://www.expressjs.com) server written in TypeScript.
 
